@@ -5,13 +5,15 @@
 키보드 타자로 쉽고 빠르게 일기를 작성하고, 아이디어가 부족할땐 랜덤으로 키워드를 제공하고, 그날 함께 했던 인물들에 따라 일기를 모아서 정렬해주는 등 
 소중한 추억을 편리하게 기록하고 볼 수 있게 하는 서비스입니다.
 
-image(pixabay 등 무료 이미지 활용)
-![diary](https://user-images.githubusercontent.com/102154392/236809619-f4b05c31-7f81-4e55-bc7a-f29492be0a58.jpg)
+image(pixabay 등 무료 이미지 활용)!
+[diary](https://user-images.githubusercontent.com/102154392/236805013-9de499e8-5beb-4275-adc6-6ddb0e2e17ec.jpg)
+
 
 ## 💻기능 소개
 - project 에 포함시킬 기능 설명(향후 변경 가능함)
 
 사용될 구조체 선언 
+
 구조체 이름 : diary
 int date //20230507
 string names //이 일기에 등장하는 등장인물들
@@ -60,3 +62,5 @@ selectWeather(): 일기를 쓸 때 마다 날씨를 구체적으로 적는 것�
 ## 🧑‍🤝‍🧑Team ProjectNA
 - 저희 "프로젝트나"팀은 "나"씨 성을 가진 팀원들이 모여 프로젝트를 진행한다고 하여 이렇게 이름을 짓게 되었습니다. 
 - 팀원 소개
+
+22200240 나찬미
