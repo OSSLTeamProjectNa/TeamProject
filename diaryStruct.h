@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 typedef struct diary{
-    int date[8];
+    int year[4];
+    int month[2];
+    int date[2];
     char names[100];
     char content[1000]; //공백포함
     int password [4];
