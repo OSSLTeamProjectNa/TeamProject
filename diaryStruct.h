@@ -3,9 +3,9 @@
 #include <string.h>
 
 typedef struct diary{
-    int year[4];
-    int month[2];
-    int date[2];
+    int year;
+    int month;
+    int date;
     char names[100];
     char title[15];
     char content[1000]; //공백포함

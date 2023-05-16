@@ -9,21 +9,22 @@ int selectMenu(){
 }
 
 void listDiary(Diary *d[], int count){
-    printf("\nYYYY-MM-DD Title                             Locked\n");
+    printf("\nNO | YYYY-MM-DD | Title                      Locked\n");
     printf("=====================================================\n");
     for(int i =0; i <count ; i++){
-        if(d[i]->year[0] == -1) continue;
+        if(d[i]->year == -1) continue;
         printf("%2d ", i+1);
         readDiary(*d[i]);
-        }
-    printf("\n");
+        printf("\n");
+    }
+   
 }
 
 
 int selectNum(Diary *d[], int max){
     listDiary(d,max);
     int no;
-    printf("원하는 알기 번호는(취소 :0)? ");
+    printf("\n원하는 일기 번호는(취소 :0)? ");
     scanf("%d", &no);
 
     return no;
@@ -36,16 +37,16 @@ int main(){
     count = 0;
     index = 0;
 
-    menu = selectMenu();
 
     while (1){
+        menu = selectMenu();
         if (menu == 0) break;
-        if (menu == 1){listDiary(d, index);}
+        if (menu == 1){listDiary(d, count);}
         else if (menu == 2){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
             index++;
-            count ++;
+            count++;
         }
         else if (menu == 3){
             int no = selectNum(d,index);
