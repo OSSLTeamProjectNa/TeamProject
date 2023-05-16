@@ -39,9 +39,10 @@ int main(){
 
 
     while (1){
+        printf("\n>>>>>>>index: %d | count: %d<<<<<<<<<<<<\n", index, count);
         menu = selectMenu();
         if (menu == 0) break;
-        if (menu == 1){listDiary(d, count);}
+        if (menu == 1){listDiary(d, index);}
         else if (menu == 2){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
@@ -53,7 +54,22 @@ int main(){
             if (no == 0) printf("취소됨!\n");
             else updateDiary(d[no-1]);
         }
-        else if (menu == 4){printf("menu 4");}
+        else if (menu == 4){
+            int no = selectNum(d,index);
+            if (no == 0) printf("취소됨!\n");
+            else {
+                int temp;
+                printf("정말로 삭제하시겠습니까? (삭제 :1) ");
+                scanf("%d", &temp);
+
+                if (temp == 1) {
+                    if (d[no-1]) {
+                        deleteDiary(d[no-1]);
+                    }
+                    count--;
+                }
+            }
+        }
     }
         
     return 0;

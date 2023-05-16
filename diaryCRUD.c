@@ -40,3 +40,9 @@ int updateDiary(Diary *d){
     printf("=> 수정성공!");
     return 1;
 }
+
+void deleteDiary(Diary *d){
+    free(d);
+    d->year = -1;
+}
+        
