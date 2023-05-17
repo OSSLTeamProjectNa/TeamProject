@@ -33,6 +33,12 @@ void listBookmark(Diary *d[], int count){
     printf("\n");
 }
 
+void setBookmark(Diary *d){
+    if (d->bookMark == 1){
+        d->bookMark = 0;
+    }
+    else d->bookMark = 1;
+}
 
 int selectNum(Diary *d[], int max){
     listDiary(d,max);
@@ -88,6 +94,14 @@ int main(){
             listBookmark(d, count);
             int imenu;
             int itemp;
+        }
+        else if (menu == 6){
+            int itemp;
+            while(1){
+                itemp = selectNum(d,index);
+                if (itemp == 0) break;
+                else setBookmark(d[itemp-1]);
+            }
         }
 
     }
