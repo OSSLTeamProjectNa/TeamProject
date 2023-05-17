@@ -3,7 +3,7 @@
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
-    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 | 7. 이름별 검색 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -49,6 +49,20 @@ int selectNum(Diary *d[], int max){
     return no;
 }
 
+
+int searchName(Diary *d[], char *tname, int count){
+    int index = -1;
+    for (int i =0; i<count; i++){
+        if (d[i]->year == -1) continue;
+        if (strstr(d[i]->names,tname)== 0) {
+            index = i;
+            break;
+        }
+    }
+
+    return index;
+
+}
 
 int main(){
     Diary *d[20];
@@ -103,6 +117,36 @@ int main(){
                 else setBookmark(d[itemp-1]);
             }
         }
+        else if (menu == 7){
+            char temp[20];
+            int index;
+            printf("검색 하실 이름을 입력해주세요. ");
+            scanf("%s", temp);
+
+            index = searchName(d,temp, count);
+            if (index == -1) printf("해당되는 일기가 없습니다! \n");
+            else{
+                printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
+                printf("=====================================================\n");
+                readDiary(*d[index]);
+            }
+
+        }
+        else if (menu==8){
+            char temp[20];
+            int index;
+            printf("검색 하실 일기의 제목을 입력해주세요. ");
+            scanf("%s", temp);
+
+            index = searchTitle(d,temp, count);
+            if (index == -1) printf("해당되는 일기가 없습니다! \n");
+            else{
+                printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
+                printf("=====================================================\n");
+                readDiary(*d[index]);
+            }
+        }
+          
 
     }
         
