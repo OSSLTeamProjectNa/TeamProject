@@ -3,13 +3,13 @@
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
-    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
 
 void listDiary(Diary *d[], int count){
-    printf("\nNO | YYYY-MM-DD | Title                      Locked\n");
+    printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
     printf("=====================================================\n");
     for(int i =0; i <count ; i++){
         if(d[i]->year == -1) continue;
@@ -18,6 +18,19 @@ void listDiary(Diary *d[], int count){
         printf("\n");
     }
    
+}
+
+void listBookmark(Diary *d[], int count){
+    printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
+    printf("=====================================================\n");
+    
+    for(int i =0; i <count ; i++){
+        if(d[i]->year == -1) continue;
+        if (d[i]->bookMark == 0) continue;
+        printf("%2d ", i+1);
+        readDiary(*d[i]);
+        }
+    printf("\n");
 }
 
 
@@ -70,6 +83,13 @@ int main(){
                 }
             }
         }
+        else if (menu == 5){
+            printf("========즐겨찾기 한 일기 목록=======");
+            listBookmark(d, count);
+            int imenu;
+            int itemp;
+        }
+
     }
         
     return 0;

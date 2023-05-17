@@ -6,6 +6,7 @@ typedef struct diary{
     int year;
     int month;
     int date;
+    int bookMark;
     char names[100];
     char title[15];
     char content[1000]; //공백포함

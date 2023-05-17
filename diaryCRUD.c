@@ -2,8 +2,10 @@
 
 void readDiary(Diary d){
     char isLocked = 'X';
+    char isBookMark = 'X';
     if (d.password[0] != -1) isLocked = 'O';
-    printf("| %d-%d-%d | %s | %c |", d.year, d.month, d.date, d.title, isLocked);
+    if (d.bookMark != 0) isBookMark = 'O';
+    printf("| %c | %d-%d-%d | %s | %c |", isBookMark, d.year, d.month, d.date, d.title, isLocked);
 }
 
 int addDiary(Diary *d){
@@ -18,6 +20,7 @@ int addDiary(Diary *d){
         printf("이 추억에 함께한 인물들을 적어주세요. (글자 수 제한: 100글자): ");
         scanf("%s", &d->names);
         d->password[0] = -1;
+        d->bookMark = 0;
 
         return 1;
 }
@@ -34,7 +37,6 @@ int updateDiary(Diary *d){
     scanf("%s",d->content);
     printf("이 추억에 함께한 인물들을 적어주세요. (글자 수 제한: 100글자): ");
     scanf("%s", d->names);
-    printf("아");
     d->password[0] = -1;
 
     printf("=> 수정성공!");
