@@ -8,6 +8,14 @@ void readDiary(Diary d){
     printf("| %c | %d-%d-%d | %s | %c |", isBookMark, d.year, d.month, d.date, d.title, isLocked);
 }
 
+void viewDiary(Diary *d){
+    printf("날짜: %d년 %d월 %d일\n", d->year, d->month, d->date);
+    printf("날씨: %s\n", d->weather);
+    printf("제목: %s\n", d->title);
+    printf("\n%s\n\n", d->content);
+    printf("추억을 함께한 사람: %s\n", d->names);
+}
+
 int addDiary(Diary *d){
         printf("날짜를 년도, 월, 일 순서로 공백으로 구분하여 입력해주세요. (ex. 2023 05 16): ");
         scanf("%d %d %d", &d->year, &d->month, &d->date);

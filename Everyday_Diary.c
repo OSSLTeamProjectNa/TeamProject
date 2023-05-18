@@ -88,7 +88,12 @@ int main(){
         printf("\n>>>>>>>index: %d | count: %d<<<<<<<<<<<<\n", index, count);
         menu = selectMenu();
         if (menu == 0) break;
-        if (menu == 1){listDiary(d, index);}
+        if (menu == 1){
+            listDiary(d, index);
+            int no = selectNum(d,index);
+            if (no == 0) printf("Ãë¼ÒµÊ!\n");
+            else viewDiary(d[no-1]);
+        }
         else if (menu == 2){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
