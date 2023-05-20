@@ -1,6 +1,5 @@
 #include "diaryCRUD.h"
 
-//Git clone test 입니다 33
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
@@ -90,7 +89,7 @@ int main(){
         menu = selectMenu();
         if (menu == 0) break;
         if (menu == 1){
-            listDiary(d, index);
+            //listDiary(d, index);
             int no = selectNum(d,index);
             if (no == 0) printf("취소됨!\n");
             else viewDiary(d[no-1]);
@@ -168,6 +167,5 @@ int main(){
           
 
     }
-        
     return 0;
 }
