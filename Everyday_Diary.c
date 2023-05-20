@@ -1,6 +1,6 @@
 #include "diaryCRUD.h"
 
-//Git clone test 입니다 
+//Git clone test 입니다 33
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
