@@ -14,6 +14,22 @@ typedef struct diary{
     char weather[10]; //맑음, 바람, 비, 눈, 흐림 중에 설정
 } Diary;
 
+//파일 여는 함수
+void openFile(const char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        printf("파일을 열 수 없습니다.\n");
+        return;
+    }
+
+    char ch;
+    while ((ch = fgetc(file)) != EOF) {
+        putchar(ch);
+    }
+
+    fclose(file);
+}
+
 
 void saveDiary(const Diary *diaryList, int countDiaries, const char *fileName) {
 
@@ -124,34 +140,34 @@ const char* selectWeather() {
     return weather;
 }
 
-//일기의 번호를 입력받아 해당 일기 삭제하는 기능
-//diaryList: 일기 구조체(Diary) 배열의 포인터입니다.
-//numDiaries: 현재까지 저장된 일기의 개수를 나타내는 변수의 포인터입니다.
-void deleteDiary(Diary *diaryList, int *numDiaries) {
-    if (*numDiaries == 0) {
-        printf("No diaries available.\n");
-        return;
-    }
+// //일기의 번호를 입력받아 해당 일기 삭제하는 기능
+// //diaryList: 일기 구조체(Diary) 배열의 포인터입니다.
+// //numDiaries: 현재까지 저장된 일기의 개수를 나타내는 변수의 포인터입니다.
+// void deleteDiary(Diary *diaryList, int *numDiaries) {
+//     if (*numDiaries == 0) {
+//         printf("No diaries available.\n");
+//         return;
+//     }
 
-    //다이어리 번호 입력 기입
-    int diaryIndex;
-    printf("Enter the diary number to delete (1 - %d): ", *numDiaries);
-    scanf("%d", &diaryIndex);
+//     //다이어리 번호 입력 기입
+//     int diaryIndex;
+//     printf("Enter the diary number to delete (1 - %d): ", *numDiaries);
+//     scanf("%d", &diaryIndex);
 
-    //입력한 번호가 유효하지 않을 경우에는 적절한 오류 메시지를 출력
-    if (diaryIndex < 1 || diaryIndex > *numDiaries) {
-        printf("Invalid diary number.\n");
-        return;
-    }
+//     //입력한 번호가 유효하지 않을 경우에는 적절한 오류 메시지를 출력
+//     if (diaryIndex < 1 || diaryIndex > *numDiaries) {
+//         printf("Invalid diary number.\n");
+//         return;
+//     }
 
-    // 선택한 일기를 삭제하고 배열을 재정렬
-    for (int i = diaryIndex - 1; i < *numDiaries - 1; i++) {
-        diaryList[i] = diaryList[i + 1];
-    }
+//     // 선택한 일기를 삭제하고 배열을 재정렬
+//     for (int i = diaryIndex - 1; i < *numDiaries - 1; i++) {
+//         diaryList[i] = diaryList[i + 1];
+//     }
 
-    (*numDiaries)--; //일기 삭제 후 자동으로 감소
-    printf("Diary deleted successfully.\n");
-}
+//     (*numDiaries)--; //일기 삭제 후 자동으로 감소
+//     printf("Diary deleted successfully.\n");
+// }
 
 // 지금까지 작성한 일기 목록을 보여준다
 // 각 일기의 번호와 제목을 출력하여 목록을 표시
