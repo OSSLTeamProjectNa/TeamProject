@@ -32,28 +32,23 @@ void openFile(const char *fileName) {
 
 
 void saveDiary(const Diary *diaryList, int countDiaries, const char *fileName) {
-
-// diaryList: 일기 구조체(Diary) 배열의 포인터
-// numDiaries: 저장할 일기의 개수
-// fileName: 일기를 저장할 파일의 이름
     FILE *file = fopen(fileName, "wb");
     if (file == NULL) {
         printf("Failed to open the file.\n");
         return;
     }
 
-    // 일기의 개수를 파일에 저장
     fwrite(&countDiaries, sizeof(int), 1, file);
 
-    // 일기들을 순회하며 파일에 저장
     for (int i = 0; i < countDiaries; i++) {
-        // 일기 구조체를 파일에 저장
         fwrite(&diaryList[i], sizeof(Diary), 1, file);
     }
 
     fclose(file);
     printf("Diaries saved successfully.\n");
 }
+
+
 
 #define MAX_DIARIES 100
 //. 일기 구조체 배열(Diary 배열)에 저장할 수 있는 최대 일기 개수
@@ -197,7 +192,7 @@ void viewDiary(const Diary *diaryList, int numDiaries) {
 int selectMenu(){
     int menu;
     printf("\n|------------ ���ϸ��� ���̾ ------------|\n");
-    printf("| 1. �ϱ� ��ȸ | 2. �ϱ� �߰� | 3. �ϱ� ���� | 4. �ϱ� ���� | 5. ���ã�� ��� | 6. ���ã�� �߰�/���� |\n| 7. �Բ��� �ι� �̸��� �˻� | 8. �������� �˻� | 0. ���� |\n\n=> ���ϴ� �޴���? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 파일에 저장 | 4. 일기 수정 | 5. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 |  8. 비밀일기 추가 | 9. 랜덤 키워드 선정 | 9. 날씨 선장 | 10. 일기 출력 | 11. 일기 목록 출력| | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -289,12 +284,19 @@ int main(){
             index++;
             count++;
         }
-        else if (menu == 3){
+            else if (menu == 3){ //파일에 저장 
+             Diary diaryList[MAX_DIARIES];
+            int numDiaries = 0;
+            // 일기를 작성하고 diaryList에 추가하는 코드
+            // 파일에 일기 저장
+            saveDiary(diaryList, numDiaries, "diary.txt");
+        }
+        else if (menu == 4){
             int no = selectNum(d,index);
             if (no == 0) printf("��ҵ�!\n");
             else updateDiary(d[no-1]);
         }
-        else if (menu == 4){
+        else if (menu == 5){
             int no = selectNum(d,index);
             if (no == 0) printf("��ҵ�!\n");
             else {
@@ -310,13 +312,13 @@ int main(){
                 }
             }
         }
-        else if (menu == 5){
+        else if (menu == 6){
             printf("========���ã�� �� �ϱ� ���=======");
             listBookmark(d, count);
             int imenu;
             int itemp;
         }
-        else if (menu == 6){
+        else if (menu == 7){
             int itemp;
             while(1){
                 itemp = selectNum(d,index);
@@ -324,7 +326,7 @@ int main(){
                 else setBookmark(d[itemp-1]);
             }
         }
-        else if (menu == 7){
+        else if (menu == 8){
             char temp[20];
             int index;
             printf("�˻� �Ͻ� �̸��� �Է����ּ���. ");
@@ -339,7 +341,7 @@ int main(){
             }
 
         }
-        else if (menu==8){
+        else if (menu==9){
             char temp[20];
             int index;
             printf("�˻� �Ͻ� �ϱ��� ������ �Է����ּ���. ");
@@ -353,7 +355,48 @@ int main(){
                 readDiary(*d[index]);
             }
         }
-          
+            else if (menu==10){
+            Diary diaryList[MAX_DIARIES];
+            int numDiaries = 0;
+
+            // 비밀 일기 추가
+            addSecretDiary(diaryList, &numDiaries);
+        }
+            else if (menu==11){
+            // 랜덤 키워드 선정
+            const char* keyword = randomTopic();
+            printf("Random topic: %s\n", keyword);
+
+        }
+            else if (menu==12){
+            // 날씨 선정
+            const char* weather = selectWeather();
+            printf("Selected weather: %s\n", weather);
+        }
+            else if (menu==13){
+                // 일기 구조체 배열과 일기 개수 변수
+                Diary diaryList[MAX_DIARIES];
+                int numDiaries = 0;
+
+                // 일기 출력
+                int diaryNumber;
+                printf("Enter the diary number to view: ");
+                scanf("%d", &diaryNumber);
+
+                viewDiary(diaryList, numDiaries, diaryNumber);
+
+
+        }
+            else if (menu==14){
+            // 일기 구조체 배열과 일기 개수 변수
+            Diary diaryList[MAX_DIARIES];
+            int numDiaries = 0;
+
+            // 일기 목록 출력
+            listDiary(diaryList, numDiaries);
+
+
+        }       
 
     }
         
