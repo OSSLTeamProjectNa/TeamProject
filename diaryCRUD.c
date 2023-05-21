@@ -21,12 +21,13 @@ int addDiary(Diary *d){
         scanf("%d %d %d", &d->year, &d->month, &d->date);
         printf("일기의 날씨를 입력 해주세요. (ex. 맑음, 흐림, 비 등): ");
         scanf("%s", d->weather);
+        getchar();
         printf("일기의 제목을 입력 해주세요. (글자 수 제한: 15글자): ");
-        scanf("%s",d->title);
+        fgets(d->title, 15, stdin);
         printf("일기의 내용을 입력 해주세요. (글자 수 제한: 1000글자): ");
-        scanf("%s",&d->content);
+        fgets(d->content, 1000, stdin);
         printf("이 추억에 함께한 인물들을 적어주세요. (글자 수 제한: 100글자): ");
-        scanf("%s", &d->names);
+        fgets(d->names, 100, stdin);
         d->password[0] = -1;
         d->bookMark = 0;
 
@@ -35,16 +36,18 @@ int addDiary(Diary *d){
 
 
 int updateDiary(Diary *d){
-    printf("날짜를 년도, 월, 일 순서로 공백으로 구분하여 입력해주세요. (ex. 2023 05 16): ");
-    scanf("%d %d %d", &d->year, &d->month, &d->date);
-    printf("일기의 날씨를 입력 해주세요. (ex. 맑음, 흐림, 비 등): ");
-    scanf("%s", d->weather);
-    printf("일기의 제목을 입력 해주세요. (글자 수 제한: 15글자): ");
-    scanf("%s",d->title);
-    printf("일기의 내용을 입력 해주세요. (글자 수 제한: 1000글자): ");
-    scanf("%s",d->content);
-    printf("이 추억에 함께한 인물들을 적어주세요. (글자 수 제한: 100글자): ");
-    scanf("%s", d->names);
+        printf("날짜를 년도, 월, 일 순서로 공백으로 구분하여 입력해주세요. (ex. 2023 05 16): ");
+        scanf("%d %d %d", &d->year, &d->month, &d->date);
+        printf("일기의 날씨를 입력 해주세요. (ex. 맑음, 흐림, 비 등): ");
+        scanf("%s", d->weather);
+        getchar();
+        printf("일기의 제목을 입력 해주세요. (글자 수 제한: 15글자): ");
+        fgets(d->title, 15, stdin);
+        printf("일기의 내용을 입력 해주세요. (글자 수 제한: 1000글자): ");
+        fgets(d->content, 1000, stdin);
+        printf("이 추억에 함께한 인물들을 적어주세요. (글자 수 제한: 100글자): ");
+        fgets(d->names, 100, stdin);
+        d->password[0] = -1;
     d->password[0] = -1;
 
     printf("=> 수정성공!");
