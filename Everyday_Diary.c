@@ -56,7 +56,7 @@ int searchName(Diary *d[], char *tname, int count){
     int index = 0;
     for (int i =0; i<count; i++){
         if (d[i]->year == -1) continue;
-        if (strstr(d[i]->names,tname)== 0) {
+        if (strstr(d[i]->names,tname) != 0) {
             index++;
             printf("| %d |", index);
             readDiary(*d[i]);
@@ -71,7 +71,7 @@ int searchTitle(Diary *d[], char *ttitle, int count){
     int index = 0;
     for (int i =0; i<count; i++){
         if (d[i]->year == -1) continue;
-        if (strstr(d[i]->title,ttitle)== 0) {
+        if (strstr(d[i]->title,ttitle) != 0) {
             index++;
             printf("| %d |", index);
             readDiary(*d[i]);
@@ -159,16 +159,14 @@ int main(){
         else if (menu==8){
             char temp[20];
             int index;
-            printf("검색 하실 일기의 제목을 입력해주세요. ");
+            printf("검색 하실 제목을 입력해주세요. ");
             scanf("%s", temp);
+            printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
+            printf("=====================================================\n");
 
             index = searchTitle(d,temp, count);
-            if (index == -1) printf("해당되는 일기가 없습니다! \n");
-            else{
-                printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
-                printf("=====================================================\n");
-                readDiary(*d[index]);
-            }
+            if (index == 0) printf("해당되는 일기가 없습니다! \n");
+
         }
 
         else if (menu==14){
