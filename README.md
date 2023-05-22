@@ -5,13 +5,10 @@
 키보드 타자로 쉽고 빠르게 일기를 작성하고, 아이디어가 부족할땐 랜덤으로 키워드를 제공하고, 그날 함께 했던 인물들에 따라 일기를 모아서 정렬해주는 등 
 소중한 추억을 편리하게 기록하고 볼 수 있게 하는 서비스입니다.
 
-<<<<<<< HEAD
-image(pixabay 등 무료 이미지 활용)
+
 ![diary](https://user-images.githubusercontent.com/102154392/236811565-b0864d44-8b0e-4685-b0d8-8d4971df6d5a.jpg)
 =======
-![image](https://user-images.githubusercontent.com/102154392/236805013-9de499e8-5beb-4275-adc6-6ddb0e2e17ec.jpg)
 
->>>>>>> upstream/main
 
 ## 💻기능 소개
 - project 에 포함시킬 기능 설명(향후 변경 가능함)
