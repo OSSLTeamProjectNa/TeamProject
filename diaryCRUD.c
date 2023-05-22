@@ -3,6 +3,7 @@
 
 
 void readDiary(Diary d){
+    
     char isLocked = 'X';
     char isBookMark = 'X';
     if (d.password != -1) isLocked = 'O';
@@ -11,6 +12,10 @@ void readDiary(Diary d){
 }
 
 void viewDiary(Diary *d){
+    if(d->year == -1){
+        printf("해당 번호의 일기는 이미 삭제 되었습니다.");
+        return;
+    }
     printf("날짜: %d년 %d월 %d일\n", d->year, d->month, d->date);
     printf("날씨: %d\n", d->weather);
     printf("제목: %s\n", d->title);
