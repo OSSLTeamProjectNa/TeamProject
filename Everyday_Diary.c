@@ -3,8 +3,8 @@
 
 int selectMenu(){
     int menu;
-    printf("\n|------------ ¸ÅÀÏ¸ÅÀÏ ´ÙÀÌ¾î¸® ------------|\n");
-    printf("| 1. ÀÏ±â Á¶È¸ | 2. ÀÏ±â Ãß°¡ | 3. ÀÏ±â ¼öÁ¤ | 4. ÀÏ±â »èÁ¦ | 5. Áñ°ÜÃ£±â ¸ñ·Ï | 6. Áñ°ÜÃ£±â Ãß°¡/»èÁ¦ |\n| 7. ÇÔ²²ÇÑ ÀÎ¹° ÀÌ¸§º° °Ë»ö | 8. Á¦¸ñÀ¸·Î °Ë»ö | 14. ÀÏ±â ÀúÀå | 0. Á¾·á |\n\n=> ¿øÇÏ´Â ¸Ş´º´Â? ");
+    printf("\n|------------ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾î¸® ------------|\n");
+    printf("| 1. ï¿½Ï±ï¿½ ï¿½È¸ | 2. ï¿½Ï±ï¿½ ï¿½ß°ï¿½ | 3. ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ | 4. ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ | 5. ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ | 6. ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ ï¿½ß°ï¿½/ï¿½ï¿½ï¿½ |\n| 7. ï¿½Ô²ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ | 8. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ | 14. ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ | 0. ï¿½ï¿½ï¿½ |\n\n=> ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş´ï¿½ï¿½ï¿½? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -44,7 +44,7 @@ void setBookmark(Diary *d){
 int selectNum(Diary *d[], int max){
     listDiary(d,max);
     int no;
-    printf("\n¿øÇÏ´Â ÀÏ±â ¹øÈ£´Â(Ãë¼Ò :0)? ");
+    printf("\nï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½È£ï¿½ï¿½(ï¿½ï¿½ï¿½ :0)? ");
     scanf("%d", &no);
 
     return no;
@@ -93,29 +93,31 @@ int main(){
 
         menu = selectMenu();
         if (menu == 0) break;
-        if (menu == 1){
-            //listDiary(d, index);
-            int no = selectNum(d,index);
-            if (no == 0) printf("Ãë¼ÒµÊ!\n");
-            else viewDiary(d[no-1]);
-        }
+        if (menu == 1){listDiary(d, index);}
         else if (menu == 2){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
             index++;
             count ++;
         }
-        else if (menu == 3){
-            int no = selectNum(d,index);
-            if (no == 0) printf("Ãë¼ÒµÊ!\n");
-            else updateDiary(d[no-1]);
+            else if (menu == 3){ //íŒŒì¼ì— ì €ì¥ 
+             Diary diaryList[MAX_DIARIES];
+            int numDiaries = 0;
+            // ì¼ê¸°ë¥¼ ì‘ì„±í•˜ê³  diaryListì— ì¶”ê°€í•˜ëŠ” ì½”ë“œ
+            // íŒŒì¼ì— ì¼ê¸° ì €ì¥
+            saveDiary(diaryList, numDiaries, "diary.txt");
         }
         else if (menu == 4){
             int no = selectNum(d,index);
-            if (no == 0) printf("Ãë¼ÒµÊ!\n");
+            if (no == 0) printf("ï¿½ï¿½Òµï¿½!\n");
+            else updateDiary(d[no-1]);
+        }
+        else if (menu == 5){
+            int no = selectNum(d,index);
+            if (no == 0) printf("ï¿½ï¿½Òµï¿½!\n");
             else {
                 int temp;
-                printf("Á¤¸»·Î »èÁ¦ÇÏ½Ã°Ú½À´Ï±î? (»èÁ¦ :1) ");
+                printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½? (ï¿½ï¿½ï¿½ï¿½ :1) ");
                 scanf("%d", &temp);
 
                 if (temp == 1) {
@@ -126,13 +128,13 @@ int main(){
                 }
             }
         }
-        else if (menu == 5){
-            printf("========Áñ°ÜÃ£±â ÇÑ ÀÏ±â ¸ñ·Ï=======");
+        else if (menu == 6){
+            printf("========ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½=======");
             listBookmark(d, count);
             int imenu;
             int itemp;
         }
-        else if (menu == 6){
+        else if (menu == 7){
             int itemp;
             while(1){
                 itemp = selectNum(d,index);
@@ -140,14 +142,14 @@ int main(){
                 else setBookmark(d[itemp-1]);
             }
         }
-        else if (menu == 7){
+        else if (menu == 8){
             char temp[20];
             int index;
-            printf("°Ë»ö ÇÏ½Ç ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä. ");
+            printf("ï¿½Ë»ï¿½ ï¿½Ï½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. ");
             scanf("%s", temp);
 
             index = searchName(d,temp, count);
-            if (index == -1) printf("ÇØ´çµÇ´Â ÀÏ±â°¡ ¾ø½À´Ï´Ù! \n");
+            if (index == -1) printf("ï¿½Ø´ï¿½Ç´ï¿½ ï¿½Ï±â°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½! \n");
             else{
                 printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
                 printf("=====================================================\n");
@@ -155,14 +157,14 @@ int main(){
             }
 
         }
-        else if (menu==8){
+        else if (menu==9){
             char temp[20];
             int index;
-            printf("°Ë»ö ÇÏ½Ç ÀÏ±âÀÇ Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä. ");
+            printf("ï¿½Ë»ï¿½ ï¿½Ï½ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. ");
             scanf("%s", temp);
 
             index = searchTitle(d,temp, count);
-            if (index == -1) printf("ÇØ´çµÇ´Â ÀÏ±â°¡ ¾ø½À´Ï´Ù! \n");
+            if (index == -1) printf("ï¿½Ø´ï¿½Ç´ï¿½ ï¿½Ï±â°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½! \n");
             else{
                 printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
                 printf("=====================================================\n");
@@ -173,6 +175,8 @@ int main(){
             saveDiary(d, count);
         }
 
+
     }
+        
     return 0;
 }
