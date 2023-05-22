@@ -8,8 +8,8 @@ typedef struct diary{
     int date;
     int bookMark;
     char names[100];
-    char title[15];
+    char title[100];
     char content[1000]; //공백포함
-    int password [4];
-    char weather[3]; //맑음, 바람, 비, 눈, 흐림 중에 설정
+    int password;
+    int weather; //맑음, 바람, 비, 눈, 흐림 중에 설정
 } Diary;

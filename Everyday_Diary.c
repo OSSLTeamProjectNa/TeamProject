@@ -1,9 +1,10 @@
-#include "diaryCRUD.h"
+
+#include "diaryFile.h"
 
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
-    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 14. 일기 저장 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -78,14 +79,18 @@ int searchTitle(Diary *d[], char *tname, int count){
 }
 
 int main(){
-    Diary *d[20];
+    Diary *d[100];
     int menu, count, index;
-    count = 0;
-    index = 0;
+
+    
+    index = loadDiary(d);
+    count = index;
 
 
     while (1){
         printf("\n>>>>>>>index: %d | count: %d<<<<<<<<<<<<\n", index, count);
+        printf("%d", d[0]->year);
+
         menu = selectMenu();
         if (menu == 0) break;
         if (menu == 1){
@@ -98,7 +103,7 @@ int main(){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
             index++;
-            count++;
+            count ++;
         }
         else if (menu == 3){
             int no = selectNum(d,index);
@@ -164,7 +169,9 @@ int main(){
                 readDiary(*d[index]);
             }
         }
-          
+        else if (menu==14){
+            saveDiary(d, count);
+        }
 
     }
     return 0;
