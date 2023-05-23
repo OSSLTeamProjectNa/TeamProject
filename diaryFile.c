@@ -13,7 +13,7 @@ void saveDiary(Diary *d[], int count){
     for(int i = 0; i < count; i++){
 
         if(d[i]->year == -1) continue;
-        fprintf(fp, "%d %d %d %d %d %d\n", d[i]->year, d[i]->month, d[i]->date, d[i]->bookMark, d[i]->weather);
+        fprintf(fp, "%d %d %d %d %d %d\n", d[i]->year, d[i]->month, d[i]->date, d[i]->bookMark, d[i]->weather, d[i]->password);
         fprintf(fp, "%s\n", d[i]->names);
         fprintf(fp, "%s\n", d[i]->title);
         fprintf(fp, "%s\n", d[i]->content);
@@ -49,9 +49,10 @@ int loadDiary (Diary *d[]){
         temp = strtok(NULL, " ");
         d[i]->bookMark = atoi(temp);
         temp = strtok(NULL, " ");
-        d[i]->password = atoi(temp);
-        temp = strtok(NULL, " ");
         d[i]->weather = atoi(temp);
+        temp = strtok(NULL, " ");
+        d[i]->password = atoi(temp);
+
         
         fgets(d[i]->names,100,fp);
         d[i]->names[strlen(d[i]->names)-1] = 0;

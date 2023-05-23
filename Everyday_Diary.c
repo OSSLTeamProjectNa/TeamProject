@@ -42,6 +42,39 @@ void setBookmark(Diary *d){
     else d->bookMark = 1;
 }
 
+void listSecretDiary(Diary *d[], int count){
+    printf("\n| NO | BookMark | YYYY-MM-DD | Title         Locked\n");
+    printf("=====================================================\n");
+    
+    for(int i =0; i <count ; i++){
+        if(d[i]->year == -1) continue;
+        if (d[i]->password == -1) continue;
+        printf("%2d ", i+1);
+        readDiary(*d[i]);
+        printf("\n");
+        }
+}
+
+void setSecretDiary(Diary *d){
+    if (d->password == -1){
+        printf("이 일기에 대한 새로운 비밀번호를 설정 해주세요 (숫자 4자리 ~ 8자리) : ");
+        scanf("%d", &d->password);
+    }
+    else{ 
+        int temp;
+        printf("이 일기의 비밀번호를 입력 해주세요 (숫자 4자리 ~ 8자리) : ");
+        scanf("%d", &temp);
+        while(temp != d->password || temp == -1){
+            printf("잘못된 비밀번호 입니다. 다시 입력 해주세요. (취소 : -1) \n");
+            scanf("%d", &temp);
+        }
+        if (temp != -1){
+            viewDiary(d);
+        }
+    }
+}
+
+
 int selectNum(Diary *d[], int max){
     listDiary(d,max);
     int no;
@@ -109,12 +142,8 @@ int main(){
             if (no == 0) printf("취소됨!\n");
             else updateDiary(d[no-1]);
         }
+
         else if (menu == 4){
-            int no = selectNum(d,index);
-            if (no == 0) printf("취소됨!\n");
-            else updateDiary(d[no-1]);
-        }
-        else if (menu == 5){
             int no = selectNum(d,index);
             if (no == 0) printf("취소됨!\n");
             else {
@@ -130,13 +159,11 @@ int main(){
                 }
             }
         }
-        else if (menu == 6){
+        else if (menu == 5){
             printf("========즐겨찾기 한 일기 목록=======");
             listBookmark(d, count);
-            int imenu;
-            int itemp;
         }
-        else if (menu == 7){
+        else if (menu == 6){
             int itemp;
             while(1){
                 itemp = selectNum(d,index);
@@ -144,7 +171,7 @@ int main(){
                 else setBookmark(d[itemp-1]);
             }
         }
-        else if (menu == 8){
+        else if (menu == 7){
             char temp[20];
             int index;
             printf("검색 하실 이름을 입력해주세요. ");
@@ -156,7 +183,7 @@ int main(){
             if (index == 0) printf("해당되는 일기가 없습니다! \n");
 
         }
-        else if (menu==9){
+        else if (menu==8){
             char temp[20];
             int index;
 
@@ -167,6 +194,12 @@ int main(){
             printf("=====================================================\n");
             index = searchTitle(d,temp, count);
             if (index == 0) printf("해당되는 일기가 없습니다! \n");
+        }
+        else if (menu == 9){
+            printf("=======비밀 일기 목록=======");
+            listSecretDiary(d, count);
+            int imenu;
+            int itemp;
         }
         else if (menu==14){
             saveDiary(d, count);
