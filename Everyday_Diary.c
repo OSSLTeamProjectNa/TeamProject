@@ -130,7 +130,13 @@ int main(){
 
         menu = selectMenu();
         if (menu == 0) break;
-        if (menu == 1){listDiary(d, index);}
+        if (menu == 1){
+            int no = -1;
+            while (no != 0){
+                no = selectNum(d,index);
+                viewDiary(d[no-1]);
+            }
+        }
         else if (menu == 2){
             d[index] = (Diary *)malloc(sizeof(Diary));
             addDiary(d[index]);
@@ -198,8 +204,6 @@ int main(){
         else if (menu == 9){
             printf("=======비밀 일기 목록=======");
             listSecretDiary(d, count);
-            int imenu;
-            int itemp;
         }
         else if (menu==14){
             saveDiary(d, count);
