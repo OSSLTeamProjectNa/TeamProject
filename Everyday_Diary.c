@@ -4,7 +4,7 @@
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
-    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 9. 비밀 일기 목록 | 14. 일기 저장 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 9. 비밀 일기 목록 | 10. 비밀 일기 설정/해제 | 14. 일기 저장 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -55,21 +55,26 @@ void listSecretDiary(Diary *d[], int count){
         }
 }
 
-void setSecretDiary(Diary *d){
+void switchSecretDiary(Diary *d){
     if (d->password == -1){
-        printf("이 일기에 대한 새로운 비밀번호를 설정 해주세요 (숫자 4자리 ~ 8자리) : ");
-        scanf("%d", &d->password);
-    }
-    else{ 
         int temp;
-        printf("이 일기의 비밀번호를 입력 해주세요 (숫자 4자리 ~ 8자리) : ");
+        printf("비밀번호를 설정해 주세요 (숫자 4자리 ~ 8자리) : ");
         scanf("%d", &temp);
-        while(temp != d->password || temp == -1){
-            printf("잘못된 비밀번호 입니다. 다시 입력 해주세요. (취소 : -1) \n");
+        d->password = temp;
+        printf("비밀번호가 설정되었습니다!\n");
+    }
+    else {
+        int temp;
+        while(1){
+            printf("비밀번호를 입력해 주세요 (숫자 4자리 ~ 8자리, 취소 -1) : ");
             scanf("%d", &temp);
-        }
-        if (temp != -1){
-            viewDiary(d);
+            if (temp == -1) break;
+            else if (temp != d->password) printf("비밀번호가 틀렸습니다!\n");
+            else{
+                d->password = -1;  
+                printf("일기 잠금이 해제 되었습니다!\n");
+                break;
+            }
         }
     }
 }
@@ -165,10 +170,12 @@ int main(){
                 }
             }
         }
+
         else if (menu == 5){
             printf("========즐겨찾기 한 일기 목록=======");
             listBookmark(d, count);
         }
+
         else if (menu == 6){
             int itemp;
             while(1){
@@ -177,6 +184,7 @@ int main(){
                 else setBookmark(d[itemp-1]);
             }
         }
+
         else if (menu == 7){
             char temp[20];
             int index;
@@ -189,6 +197,7 @@ int main(){
             if (index == 0) printf("해당되는 일기가 없습니다! \n");
 
         }
+
         else if (menu==8){
             char temp[20];
             int index;
@@ -201,6 +210,7 @@ int main(){
             index = searchTitle(d,temp, count);
             if (index == 0) printf("해당되는 일기가 없습니다! \n");
         }
+
         else if (menu == 9){
             printf("\n=======비밀 일기 목록=======");
             listSecretDiary(d, count);
@@ -224,8 +234,17 @@ int main(){
                 }
             }
         }
-        
 
+        else if (menu ==10){
+            int itemp;
+            while(1){
+                printf("====일기 잠금/해제====\n");
+                itemp = selectNum(d,index);
+                if (itemp == 0) break;
+                else switchSecretDiary(d[itemp-1]);
+            }
+        }
+        
         else if (menu==14){
             saveDiary(d, count);
         }
