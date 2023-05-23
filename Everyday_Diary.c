@@ -4,7 +4,7 @@
 int selectMenu(){
     int menu;
     printf("\n|------------ 매일매일 다이어리 ------------|\n");
-    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 14. 일기 저장 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
+    printf("| 1. 일기 조회 | 2. 일기 추가 | 3. 일기 수정 | 4. 일기 삭제 | 5. 즐겨찾기 목록 | 6. 즐겨찾기 추가/삭제 |\n| 7. 함께한 인물 이름별 검색 | 8. 제목으로 검색 | 9. 비밀 일기 목록 | 14. 일기 저장 | 0. 종료 |\n\n=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
 }
@@ -202,9 +202,30 @@ int main(){
             if (index == 0) printf("해당되는 일기가 없습니다! \n");
         }
         else if (menu == 9){
-            printf("=======비밀 일기 목록=======");
+            printf("\n=======비밀 일기 목록=======");
             listSecretDiary(d, count);
+            int no = -1;
+            while(no!=0){
+                printf("원하는 비밀 일기 번호는(취소 :0)? ");
+                scanf("%d", &no);
+                int password;
+                while (1){
+                    printf("비밀번호를 입력 해주세요 (취소: -1):");
+                    scanf("%d", &password);
+                    if(password == -1) break;
+                    else if (password != d[no-1]->password){
+                        printf("비밀번호가 틀렸습니다!\n ");
+                    }
+                    else{
+                        viewDiary(d[no-1]);
+                        no = 0;
+                        break;
+                    }
+                }
+            }
         }
+        
+
         else if (menu==14){
             saveDiary(d, count);
         }
