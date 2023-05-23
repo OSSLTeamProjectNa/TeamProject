@@ -1,9 +1,16 @@
 #include "diaryCRUD.h"
 
-
+//1.맑음, 2.바람, 3.비 4.눈 5.흐림
+const char* selectWeather(int num){
+    if (num == 1) return ("맑음\n");
+    else if (num == 2) return ("바람\n");
+    else if (num == 3) return ("비\n"); 
+    else if (num == 4) return ("눈\n");
+    else if (num == 5) return ("흐림\n"); 
+    else return (" \n");
+}
 
 void readDiary(Diary d){
-    
     char isLocked = 'X';
     char isBookMark = 'X';
     if (d.password != -1) isLocked = 'O';
@@ -17,7 +24,7 @@ void viewDiary(Diary *d){
         return;
     }
     printf("\n날짜: %d년 %d월 %d일\n", d->year, d->month, d->date);
-    printf("날씨: %d\n", d->weather);
+    printf("날씨: %s\n", selectWeather(d->weather));
     printf("제목: %s\n", d->title);
     printf("\n%s\n\n", d->content);
     printf("추억을 함께한 사람: %s\n", d->names);
@@ -27,6 +34,7 @@ int addDiary(Diary *d){
         printf("날짜를 년도, 월, 일 순서로 공백으로 구분하여 입력해주세요. (ex. 2023 05 16): ");
         scanf("%d %d %d", &d->year, &d->month, &d->date);
 
+        int w;
         printf("일기의 날씨를 숫자로 입력 해주세요. (1.맑음, 2.바람, 3.비 4.눈 5.흐림): ");
         scanf("%d", &d->weather);
 

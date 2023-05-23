@@ -1,5 +1,5 @@
 #include "diaryStruct.h"
-
+const char* selectWeather(int num);
 void readDiary(Diary d);
 int addDiary(Diary *d);
 int updateDiary(Diary *d);
